@@ -15,6 +15,7 @@ To annotate the image,<br>
 4. To undo re-draw the rectangle press 'r' key.<br>
 5. To show the cropped image, press 'n' key.<br>
 6. To show the next image, press 'n' key again.<br>
+7. The output file saves the co-ordinates of the red-dot as a python dictionary so that it is easy to read and manipulate.<br>
 
 
 If you have any question, please email me at shreyas0906@gmail.com 
