@@ -1,5 +1,7 @@
 # Selfies with sunglasses.
 
+![alt text](https://github.com/shreyas0906/Selfies-with-sunglasses/blob/master/dataset-original.jpg)
+
 The dataset is a collection of images of selfies with sunglasses and images with sunglasses to improve the accuracy of face recognition. The dataset contains 2768 unannotated images and a total of 5536 images. The repository also has the code for annotation which is ready to use. https://www.youtube.com/watch?v=-0QIr6Nv1Yo
 
 Before executing the progam:
@@ -18,4 +20,4 @@ To annotate the image,<br>
 7. The output file saves the co-ordinates of the red-dot as a python dictionary so that it is easy to read and manipulate.<br>
 
 
-If you have any question, please email me at shreyas0906@gmail.com 
+If you have any question, please email me at shreyas0906@gmail.com
