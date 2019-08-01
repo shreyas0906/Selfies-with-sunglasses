@@ -19,13 +19,44 @@ def main(p):
     #
 
     for dirName, subDirList, fileList in os.walk(p.imageDir):
+        processDir(dirName, fileList)
 
-    onlyfiles = [f for f in os.listdir(p.imageDir) if f.endswith('.jpeg') or f.endswith('.jpg') or f.endswith('.png')]
 
-    # os.chdir(mypath)
-    # for i in onlyfiles:
-    #     if i.endswith('.jpeg') or i.endswith('.jpg') or i.endswith('.png'):
-    #         file_images.append(i)
+def processDir(dirName, fileList):
+
+    imageList = []
+
+    for imageFile in fileList:
+        if imageFile.endswith('.png') or imageFile.endswith('.jpeg') or imageFile.endswith('.jpg'):
+            imageList.append(imageFile)
+
+
+def startProcessDir(dirName, imageList):
+
+    for fileName in imageList:
+
+        image = cv2.imread(os.path.join(dirName, fileName))
+        imageClone = image.copy()
+        cv2.namedWindow(processName(fileName))
+        cv2.setMouseCallback(image, click_drag)
+
+        while True:
+
+            cv2.imshow(fileName, image)
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord("n"):
+
+
+
+
+
+def processName(fileName):
+
+    fName = fileName.split('.')[0]
+    saveName = fName + '-cropped.jpeg'
+
+    return saveName
+
 
 # Listening for the mouse events
 def click_drag(event, x, y, flags, param):
@@ -84,6 +115,10 @@ for i in file_images:
     cv2.destroyWindow("ROI")
     j += 1
 
+def checkCreateDir():
+
+    if not p.saveDir in os.listdir(os.getcwd()):
+        os.makedirs(os.getcwd() + '/' + p.saveDir)
 
 def saveCordinates():
 
