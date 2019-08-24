@@ -4,23 +4,9 @@ from argparse import ArgumentParser
 
 
 def main(p):
-    file_images = []
-    refPt = []
-    centrePt = []
-    cropping = False
-    overall_rect = []
-    overall_circl = []
-    j = 0
-    save_file = {}
-    extension = 'google-roi.jpeg'
-
-    # mypath = p.imageDir  # '/home/shreyas/PycharmProjects/final_code'
-    # save_path = p.saveDir  # '/home/shreyas/PycharmProjects/final_code/sample'
-    #
 
     for dirName, subDirList, fileList in os.walk(p.imageDir):
         processDir(dirName, fileList)
-
 
 def processDir(dirName, fileList):
 
@@ -30,43 +16,61 @@ def processDir(dirName, fileList):
         if imageFile.endswith('.png') or imageFile.endswith('.jpeg') or imageFile.endswith('.jpg'):
             imageList.append(imageFile)
 
+    startProcessDir(dirName, imageList)
+
 
 def startProcessDir(dirName, imageList):
+
+    checkAndCreateSaveDir(p)
 
     for fileName in imageList:
 
         image = cv2.imread(os.path.join(dirName, fileName))
         imageClone = image.copy()
-        cv2.namedWindow(processName(fileName))
-        cv2.setMouseCallback(image, click_drag)
+        cv2.namedWindow(fileName)
+        cv2.setMouseCallback(image, clickDrag)
 
         while True:
 
             cv2.imshow(fileName, image)
             key = cv2.waitKey(1) & 0xFF
             if key == ord("n"):
+                saveCordinates(fileName)
+                cv2.destroyWindow(fileName)
+                break
 
+            elif key == ord("r"):
+                image = imageClone
+                overallRect.remove(refPt)
+                global refPt
 
+def saveCordinates(fileName):
+    
+    saveDir = p.saveDir + 'coordinates'
+    textName = fileName.split('.')[0] + '.txt'
+    
+    with open(saveDir + '/' + textName, 'w') as f:
+        f.write(overallRect +'\n')
+        f.write(overallCircle)
 
+def checkAndCreateSaveDir(p):
 
-
-def processName(fileName):
-
-    fName = fileName.split('.')[0]
-    saveName = fName + '-cropped.jpeg'
-
-    return saveName
+    saveCordinatesDir = p.saveDir + 'coordinates'
+    
+    if not p.saveDir in os.listdir(os.getcwd()):
+        os.makedirs(os.path.join(os.getcwd(), p.saveDir))
+    
+    if not saveCordinatesDir in os.listdir(os.getcwd()):
+        os.makedirs(os.path.join(os.getcwd(), saveCordinatesDir))
 
 
 # Listening for the mouse events
-def click_drag(event, x, y, flags, param):
-    global refPt, cropping, overall_circl, overall_rect
-
+def clickDrag(event, x, y, flags, param):
+    global refPt, cropping, overallCircle, overallRect
     if event == cv2.EVENT_RBUTTONDBLCLK:
         cv2.circle(image, (x, y), 2, (0, 0, 255), -2)
-        # cv2.rectangle(image, (x,y), (x,y),)
-        centrePt.append((x, y))
-        overall_circl.append(centrePt)
+        # centrePt.append((x, y))
+        overallCircle.append(centrePt)
 
     elif event == cv2.EVENT_LBUTTONDOWN:
         refPt = [(x, y)]
@@ -74,9 +78,12 @@ def click_drag(event, x, y, flags, param):
 
     elif event == cv2.EVENT_LBUTTONUP:
         refPt.append((x, y))
-        overall_rect.append(refPt)
+        overallRect.append(refPt)
         cropping = False
     cv2.rectangle(image, refPt[0], refPt[1], (255, 255, 255), 2)
+
+
+
 
 
 for i in file_images:
@@ -87,9 +94,9 @@ for i in file_images:
     cv2.imshow(i, image)
     clone = image.copy()
     cv2.namedWindow(save_name)
-    cv2.setMouseCallback(i, click_drag)
+    cv2.setMouseCallback(i, clickDrag)
 
-    while True:
+    while True
         cv2.imshow(i, image)
         key = cv2.waitKey(1) & 0xFF
         if key == ord("n"):
@@ -101,12 +108,12 @@ for i in file_images:
             break
         elif key == ord("r"):
             image = clone.copy()
-            overall_rect.remove(refPt)
+            overallRect.remove(refPt)
             refPt = []
             centrePt = []
 
     cv2.namedWindow("ROI")
-    roi = clone[overall_rect[j][0][1]:overall_rect[j][1][1], overall_rect[j][0][0]:overall_rect[j][1][0]]
+    roi = clone[overallRect[j][0][1]:overallRect[j][1][1], overallRect[j][0][0]:overallRect[j][1][0]]
     cv2.imshow("ROI", roi)
     os.chdir(save_path)
     cv2.imwrite(save_name + extension, roi)
@@ -119,15 +126,6 @@ def checkCreateDir():
 
     if not p.saveDir in os.listdir(os.getcwd()):
         os.makedirs(os.getcwd() + '/' + p.saveDir)
-
-def saveCordinates():
-
-    f = open("co_ordinates-1.txt", 'a')
-    f.write("{}\n".format(save_file))
-    q = open("rectangular_coord.txt", 'a')
-    q.write("{}\n".format(overall_rect))
-    f.close()
-    q.close()
 
 
 if __name__ == '__main__':
