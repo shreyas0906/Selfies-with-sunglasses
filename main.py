@@ -120,11 +120,11 @@ def clickDrag(event, x, y, flags, param, image):
 #     cv2.waitKey(0)
 #     cv2.destroyWindow("ROI")
 #     j += 1
-
-def checkCreateDir():
-
-    if not p.saveDir in os.listdir(os.getcwd()):
-        os.makedirs(os.getcwd() + '/' + p.saveDir)
+#
+# def checkCreateDir():
+#
+#     if not p.saveDir in os.listdir(os.getcwd()):
+#         os.makedirs(os.getcwd() + '/' + p.saveDir)
 
 
 if __name__ == '__main__':
