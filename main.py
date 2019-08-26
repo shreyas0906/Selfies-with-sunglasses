@@ -18,11 +18,11 @@ def processDir(dirName, fileList):
 
     startProcessDir(dirName, imageList)
 
-
 def startProcessDir(dirName, imageList):
 
     checkAndCreateSaveDir(p)
-    global image
+    global image, fileName
+
     for fileName in imageList:
 
         image = cv2.imread(os.path.join(dirName, fileName))
@@ -35,9 +35,9 @@ def startProcessDir(dirName, imageList):
             cv2.imshow(fileName, image)
             key = cv2.waitKey(1) & 0xFF
             if key == ord("n"):
-                saveCordinates(fileName)
+                # saveCordinates(fileName)
                 cv2.destroyWindow(fileName)
-                continue
+                break
 
             elif key == ord("r"):
                 image = imageClone
@@ -69,20 +69,22 @@ def clickDrag(event, x, y, flags, param):
 
     elif event == cv2.EVENT_LBUTTONDOWN:
         refPt = [(x,y)]
-        print("refPt: {}".format(refPt))
 
     elif event == cv2.EVENT_LBUTTONUP:
         refPt.append((x,y))
         cv2.rectangle(image, refPt[0], refPt[1], (255, 255, 255), 1)
+    saveCordinates()
 
-def saveCordinates(fileName):
-    saveDir = p.saveDir + 'coordinates'
+
+def saveCordinates():
+
+    
+    saveDir = p.saveDir + 'Coordinates'
     textName = fileName.split('.')[0] + '.txt'
 
     with open(saveDir + '/' + textName, 'w') as f:
         f.write(overallRect + '\n')
         f.write(overallCircle)
-
 
 
 if __name__ == '__main__':
