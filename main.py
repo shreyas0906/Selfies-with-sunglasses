@@ -73,12 +73,11 @@ def clickDrag(event, x, y, flags, param):
     elif event == cv2.EVENT_LBUTTONUP:
         refPt.append((x,y))
         cv2.rectangle(image, refPt[0], refPt[1], (255, 255, 255), 1)
-    saveCordinates()
+    saveCordinates(overallRect, overallCircle)
 
 
-def saveCordinates():
+def saveCordinates(overallRect, overallCircle):
 
-    
     saveDir = p.saveDir + 'Coordinates'
     textName = fileName.split('.')[0] + '.txt'
 
