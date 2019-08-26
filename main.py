@@ -60,7 +60,7 @@ def checkAndCreateSaveDir(p):
 # Listening for the mouse events
 def clickDrag(event, x, y, flags, param):
 
-    global refPt, centrePt, overallCircle  #, overallRect
+    global refPt, centrePt, overallCircle
 
     if event == cv2.EVENT_LBUTTONDOWN:
         refPt = [(x,y)]
@@ -76,8 +76,8 @@ def saveCordinates(rect):
     saveDir = p.saveDir + 'Coordinates'
     textName = fileName.split('.')[0] + '.txt'
 
-    with open(saveDir + '/' + textName, 'wb') as f:
-        pickle.dump(rect,f)
+    with open(saveDir + '/' + textName, 'w') as f:
+        f.write("{}\n".format(str(rect)))
 
 if __name__ == '__main__':
     args = ArgumentParser()
