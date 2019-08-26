@@ -1,6 +1,7 @@
 import os
 import cv2
 from argparse import ArgumentParser
+import pickle
 
 
 def main(p):
@@ -61,30 +62,28 @@ def checkAndCreateSaveDir(p):
 # Listening for the mouse events
 def clickDrag(event, x, y, flags, param):
 
-    global refPt, centrePt, overallCircle, overallRect
+    global refPt, centrePt, overallCircle  #, overallRect
 
-    if event == cv2.EVENT_RBUTTONDBLCLK:
-        cv2.circle(image, (x, y), 2, (0, 0, 255), -2)
-        overallCircle.append((x,y))
-
-    elif event == cv2.EVENT_LBUTTONDOWN:
+    # if event == cv2.EVENT_RBUTTONDBLCLK:
+    #     overallCircle.append((x, y))
+    #     cv2.circle(image, (x, y), 2, (0, 0, 255), -2)
+    #
+    if event == cv2.EVENT_LBUTTONDOWN:
         refPt = [(x,y)]
 
     elif event == cv2.EVENT_LBUTTONUP:
         refPt.append((x,y))
         cv2.rectangle(image, refPt[0], refPt[1], (255, 255, 255), 1)
-    saveCordinates(overallRect, overallCircle)
+        saveCordinates(refPt)
 
 
-def saveCordinates(overallRect, overallCircle):
+def saveCordinates(rect):
 
     saveDir = p.saveDir + 'Coordinates'
     textName = fileName.split('.')[0] + '.txt'
 
-    with open(saveDir + '/' + textName, 'w') as f:
-        f.write(overallRect + '\n')
-        f.write(overallCircle)
-
+    with open(saveDir + '/' + textName, 'wb') as f:
+        pickle.dump(rect,f)
 
 if __name__ == '__main__':
     args = ArgumentParser()
