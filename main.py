@@ -1,8 +1,6 @@
 import os
 import cv2
 from argparse import ArgumentParser
-import pickle
-
 
 def main(p):
 
@@ -64,10 +62,6 @@ def clickDrag(event, x, y, flags, param):
 
     global refPt, centrePt, overallCircle  #, overallRect
 
-    # if event == cv2.EVENT_RBUTTONDBLCLK:
-    #     overallCircle.append((x, y))
-    #     cv2.circle(image, (x, y), 2, (0, 0, 255), -2)
-    #
     if event == cv2.EVENT_LBUTTONDOWN:
         refPt = [(x,y)]
 
