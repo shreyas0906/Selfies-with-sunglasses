@@ -41,17 +41,11 @@ def startProcessDir(dirName, imageList):
 
             elif key == ord("r"):
                 image = imageClone
-<<<<<<< HEAD
                 cv2.setMouseCallback(fileName, clickDrag)
 
             elif key == ord("q"):
                 cv2.destroyAllWindows()
                 break
-=======
-                overallRect.remove(refPt)
-                # overallCircle.remove(centrePt)
-
->>>>>>> 87c6ed37cfbbddf6195c9319e52161bfb2c29177
 
 
 def checkAndCreateSaveDir(p):
@@ -65,17 +59,8 @@ def checkAndCreateSaveDir(p):
 
 
 # Listening for the mouse events
-<<<<<<< HEAD
 def clickDrag(event, x, y, flags, param):
     global refPt
-=======
-def clickDrag(event, x, y, flags, param, image):
-    global refPt, centrePt, cropping, overallCircle, overallRect
-    if event == cv2.EVENT_RBUTTONDBLCLK:
-        cv2.circle(image, (x, y), 2, (0, 0, 255), -2)
-        centrePt.append((x, y))
-        overallCircle.append(centrePt)
->>>>>>> 87c6ed37cfbbddf6195c9319e52161bfb2c29177
 
     if event == cv2.EVENT_LBUTTONDOWN:
         refPt = [(x, y)]
@@ -90,7 +75,6 @@ def saveCroppedImage(refPt):
     saveName = fileName.split('.')[0] + '-cropped.jpg'
     cv2.imwrite(p.saveDir + '/' + saveName, croppedImage)
 
-<<<<<<< HEAD
 
 def saveCordinates(rect):
     saveDir = p.saveDir + 'Coordinates'
@@ -98,48 +82,6 @@ def saveCordinates(rect):
 
     with open(saveDir + '/' + textName, 'w') as f:
         f.write("{}\n".format(str(rect)))
-=======
-# for i in file_images:
-#
-#     file_name = i.split('.')
-#     save_name = file_name[0]
-#     image = cv2.imread(i)
-#     cv2.imshow(i, image)
-#     clone = image.copy()
-#     cv2.namedWindow(save_name)
-#     cv2.setMouseCallback(i, clickDrag)
-#
-#     while True
-#         cv2.imshow(i, image)
-#         key = cv2.waitKey(1) & 0xFF
-#         if key == ord("n"):
-#             # refPt = []
-#             save_file[str(save_name)] = centrePt
-#             # centrePt = []
-#
-#             cv2.destroyWindow(i)
-#             break
-#         elif key == ord("r"):
-#             image = clone.copy()
-#             overallRect.remove(refPt)
-#             refPt = []
-#             centrePt = []
-#
-#     cv2.namedWindow("ROI")
-#     roi = clone[overallRect[j][0][1]:overallRect[j][1][1], overallRect[j][0][0]:overallRect[j][1][0]]
-#     cv2.imshow("ROI", roi)
-#     os.chdir(save_path)
-#     cv2.imwrite(save_name + extension, roi)
-#     os.chdir(mypath)
-#     cv2.waitKey(0)
-#     cv2.destroyWindow("ROI")
-#     j += 1
-#
-# def checkCreateDir():
-#
-#     if not p.saveDir in os.listdir(os.getcwd()):
-#         os.makedirs(os.getcwd() + '/' + p.saveDir)
->>>>>>> 87c6ed37cfbbddf6195c9319e52161bfb2c29177
 
 
 if __name__ == '__main__':
