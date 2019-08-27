@@ -8,6 +8,10 @@ Usage:
 
 python main.py --imageDir "directory containing images" --saveDir "name of directory to save cropped images" 
 
+Example: 
+
+python main.py --imageDir selfies-singlasses/ --saveDir test
+
 To annotate the image,<br>
 1. left-click the mouse and drag across the image where you wish to draw the box.<br>
 2. To re-draw the rectangle press 'r' key.<br>
