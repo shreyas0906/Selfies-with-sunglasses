@@ -34,7 +34,7 @@ def startProcessDir(dirName, imageList):
             cv2.imshow(fileName, image)
             key = cv2.waitKey(1) & 0xFF
             if key == ord("n"):
-                # saveCordinates(fileName)
+                # saveCordinates(allCord)
                 cv2.destroyWindow(fileName)
                 break
 
@@ -43,7 +43,7 @@ def startProcessDir(dirName, imageList):
                 cv2.setMouseCallback(fileName, clickDrag)
 
             elif key == ord("q"):
-                cv2.destroyWindow(fileName)
+                cv2.destroyAllWindows()
                 break
 
 def checkAndCreateSaveDir(p):
@@ -56,20 +56,30 @@ def checkAndCreateSaveDir(p):
     if not saveCordinatesDir in os.listdir(os.getcwd()):
         os.makedirs(os.path.join(os.getcwd(), saveCordinatesDir))
 
-
 # Listening for the mouse events
 def clickDrag(event, x, y, flags, param):
 
-    global refPt, centrePt, overallCircle
-
+    global refPt
+    # refPt = []
+    allCord = []
     if event == cv2.EVENT_LBUTTONDOWN:
         refPt = [(x,y)]
 
     elif event == cv2.EVENT_LBUTTONUP:
         refPt.append((x,y))
         cv2.rectangle(image, refPt[0], refPt[1], (255, 255, 255), 1)
-        saveCordinates(refPt)
+        # saveCordinates(refPt)
+        allCord.append(refPt)
 
+    # rectCord.append(refPt)
+    # saveCroppedImage(allCord)
+    print(allCord)
+    saveCordinates(allCord)
+
+def saveCroppedImage(refPt):
+
+    # croppedImage = image([])
+    pass
 
 def saveCordinates(rect):
 
@@ -77,7 +87,8 @@ def saveCordinates(rect):
     textName = fileName.split('.')[0] + '.txt'
 
     with open(saveDir + '/' + textName, 'w') as f:
-        f.write("{}\n".format(str(rect)))
+        for item in rect:
+            f.write("{}\n".format(str(item)))
 
 if __name__ == '__main__':
     args = ArgumentParser()
