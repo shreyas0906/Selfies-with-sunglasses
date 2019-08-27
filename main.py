@@ -34,7 +34,8 @@ def startProcessDir(dirName, imageList):
             cv2.imshow(fileName, image)
             key = cv2.waitKey(1) & 0xFF
             if key == ord("n"):
-                # saveCordinates(allCord)
+                saveCordinates(refPt)
+                saveCroppedImage(refPt)
                 cv2.destroyWindow(fileName)
                 break
 
@@ -60,26 +61,20 @@ def checkAndCreateSaveDir(p):
 def clickDrag(event, x, y, flags, param):
 
     global refPt
-    # refPt = []
-    allCord = []
+
     if event == cv2.EVENT_LBUTTONDOWN:
         refPt = [(x,y)]
 
     elif event == cv2.EVENT_LBUTTONUP:
         refPt.append((x,y))
         cv2.rectangle(image, refPt[0], refPt[1], (255, 255, 255), 1)
-        # saveCordinates(refPt)
-        allCord.append(refPt)
 
-    # rectCord.append(refPt)
-    # saveCroppedImage(allCord)
-    print(allCord)
-    saveCordinates(allCord)
 
 def saveCroppedImage(refPt):
 
-    # croppedImage = image([])
-    pass
+    croppedImage = image[refPt[0][0]:refPt[1][0], refPt[0][1]:refPt[1][1]]
+    saveName = fileName.split('.')[0] + '-cropped.jpg'
+    cv2.imwrite(p.saveDir + '/' + saveName, croppedImage)
 
 def saveCordinates(rect):
 
