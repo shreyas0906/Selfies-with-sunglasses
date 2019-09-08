@@ -5,13 +5,13 @@
 This dataset is a collection of images of selfies with sunglasses. The dataset contains 2768 unannotated images and a total of 5536 images. The repository also has the code for annotation. https://www.youtube.com/watch?v=-0QIr6Nv1Yo
 
 Usage: 
-
+```
 python main.py --imageDir "directory containing images" --saveDir "name of directory to save cropped images" 
-
+```
 Example: 
-
+```
 python main.py --imageDir selfies-sunglasses/ --saveDir test
-
+```
 To annotate the image,<br>
 1. left-click the mouse and drag across the image where you wish to draw the box.<br>
 2. To re-draw the rectangle press 'r' key.<br>
