@@ -10,7 +10,7 @@ python main.py --imageDir "directory containing images" --saveDir "name of direc
 
 Example: 
 
-python main.py --imageDir selfies-singlasses/ --saveDir test
+python main.py --imageDir selfies-sunglasses/ --saveDir test
 
 To annotate the image,<br>
 1. left-click the mouse and drag across the image where you wish to draw the box.<br>
