@@ -76,7 +76,7 @@ def clickDrag(event, x, y, flags, param):
 
 def saveCroppedImage(refPt):
 
-    croppedImage = image[refPt[0][0]:refPt[1][0], refPt[0][1]:refPt[1][1]]
+    croppedImage = image[refPt[0][1]:refPt[1][1], refPt[0][0]:refPt[1][0]]
     saveName = fileName.split('.')[0] + '-cropped.jpg'
     cv2.imwrite(p.saveDir + '/' + saveName, croppedImage)
 
@@ -94,10 +94,11 @@ def saveCordinates(rect):
 
     else:
 
-        print("file doesn't exist")
-        print("creating file : ", textName)
         with open(saveDir + '/' + textName, 'w') as f:
             f.write("{}\n".format(str(rect)))
+
+    # saveCordinates(textName)
+
 
 
 if __name__ == '__main__':

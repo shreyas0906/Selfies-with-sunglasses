@@ -15,8 +15,9 @@ python main.py --imageDir selfies-sunglasses/ --saveDir test
 To annotate the image,<br>
 1. left-click the mouse and drag across the image where you wish to draw the box.<br>
 2. To save the coordinates press 's' key. <br>
-2. To re-draw the rectangle press 'r' key.<br>
-3. To show the next image, press 'n' key.<br>
+3. To re-draw the rectangle press 'r' key.<br>
+4. To show the next image, press 'n' key.<br>
+5. To stop the program press 'q' key. <br>
 
 - [x] Saving multiple cordinates for a single image.<br>
 - [ ] Saving cropped images for multiple cordinates from same image.<br> 
