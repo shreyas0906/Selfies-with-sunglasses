@@ -22,7 +22,7 @@ def processDir(dirName, fileList):
 
 def startProcessDir(dirName, imageList):
     checkAndCreateSaveDir(p)
-    global image, fileName
+    global image, fileName, imageClone
 
     for fileName in imageList:
 
@@ -43,7 +43,6 @@ def startProcessDir(dirName, imageList):
             if key == ord("s"):
                 saveCordinates(refPt)
 
-
             elif key == ord("r"):
                 image = imageClone
                 cv2.setMouseCallback(fileName, clickDrag)
@@ -51,8 +50,6 @@ def startProcessDir(dirName, imageList):
             elif key == ord("q"):
                 cv2.destroyAllWindows()
                 sys.exit()
-
-
 
 def checkAndCreateSaveDir(p):
     saveCordinatesDir = p.saveDir + 'Coordinates'
@@ -77,38 +74,30 @@ def clickDrag(event, x, y, flags, param):
 
 def saveCroppedImage(fileName):
 
-    textName = fileName.split('.')[0] + '.pkl' # +  '.txt'
+    pklName = fileName.split('.')[0] + '.pkl'
     i = 0
 
-    with open(os.path.join(p.saveDir + 'Coordinates', textName), 'rb') as fp:
-        itemlist = pickle.load(fp)
+    with open(os.path.join(p.saveDir + 'Coordinates', pklName), 'rb') as fp:
+        pointsList = pickle.load(fp)
 
-    firstpoints = itemlist[:2]
-    croppedImage = image[firstpoints[0][1]:firstpoints[1][1], firstpoints[0][0]:firstpoints[1][0]]
-    saveName = fileName.split('.')[0] + '-' + str(i) + '.jpg'
-    i+=1
-    cv2.imwrite(p.saveDir + '/' + saveName, croppedImage)
-    print("first crop saved")
-    # for line in f.readlines():
-    #     print(line[0])
-
+    for points in pointsList:
+        croppedImage = imageClone[points[0][1]:points[1][1], points[0][0]:points[1][0]]
+        saveName = fileName.split('.')[0] + '-' + str(i) + '.jpg'
+        i+=1
+        cv2.imwrite(p.saveDir + '/' + saveName, croppedImage)
+        print("cropped " + str(i) + '/' + str(len(pointsList)) + " image from " + fileName.split('.')[0] + '.jpg')
 
 def saveCordinates(rect):
 
     saveDir = p.saveDir + 'Coordinates'
-    textName = fileName.split('.')[0] + '.txt'
     pklName = fileName.split('.')[0] + '.pkl'
 
     if os.path.exists(os.path.join(saveDir,pklName)):
-        # f = open(os.path.join(saveDir, textName), "a+")
-        # f.write("{}\n".format(list(rect)))
-        # f.close()
 
         with open(os.path.join(saveDir,pklName), 'rb') as fp:
             coord = pickle.load(fp)
 
-        coord += rect
-        # print(coord)
+        coord += [rect]
 
         with open(os.path.join(saveDir,pklName), 'wb') as fp:
             pickle.dump(coord, fp)
@@ -116,14 +105,7 @@ def saveCordinates(rect):
     else:
 
         with open(os.path.join(saveDir,pklName), 'wb') as fp:
-            pickle.dump(rect, fp)
-
-        # with open(saveDir + '/' + textName, 'w') as f:
-        #     f.write("{}\n".format(str(rect)))
-
-    # saveCordinates(textName)
-
-
+            pickle.dump([rect], fp)
 
 if __name__ == '__main__':
     args = ArgumentParser()
