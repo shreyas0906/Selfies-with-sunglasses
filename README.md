@@ -20,7 +20,7 @@ To annotate the image,<br>
 5. To stop the program press 'q' key. <br>
 
 - [x] Saving multiple cordinates for a single image.<br>
-- [ ] Saving cropped images for multiple cordinates from same image.<br> 
+- [x] Saving cropped images for multiple cordinates from same image.<br> 
 
 If you have any question, please email me at shreyas0906@gmail.com
 
