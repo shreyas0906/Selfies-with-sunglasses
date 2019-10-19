@@ -2,6 +2,7 @@ import os
 import cv2
 import sys
 from argparse import ArgumentParser
+import pickle
 
 
 def main(p):
@@ -36,11 +37,12 @@ def startProcessDir(dirName, imageList):
             key = cv2.waitKey(1) & 0xFF
             if key == ord("n"):
                 cv2.destroyWindow(fileName)
+                saveCroppedImage(fileName)
                 break
 
             if key == ord("s"):
                 saveCordinates(refPt)
-                saveCroppedImage(refPt)
+
 
             elif key == ord("r"):
                 image = imageClone
@@ -73,29 +75,51 @@ def clickDrag(event, x, y, flags, param):
         refPt.append((x, y))
         cv2.rectangle(image, refPt[0], refPt[1], (255, 255, 255), 1)
 
+def saveCroppedImage(fileName):
 
-def saveCroppedImage(refPt):
+    textName = fileName.split('.')[0] + '.pkl' # +  '.txt'
+    i = 0
 
-    croppedImage = image[refPt[0][1]:refPt[1][1], refPt[0][0]:refPt[1][0]]
-    saveName = fileName.split('.')[0] + '-cropped.jpg'
+    with open(os.path.join(p.saveDir + 'Coordinates', textName), 'rb') as fp:
+        itemlist = pickle.load(fp)
+
+    firstpoints = itemlist[:2]
+    croppedImage = image[firstpoints[0][1]:firstpoints[1][1], firstpoints[0][0]:firstpoints[1][0]]
+    saveName = fileName.split('.')[0] + '-' + str(i) + '.jpg'
+    i+=1
     cv2.imwrite(p.saveDir + '/' + saveName, croppedImage)
+    print("first crop saved")
+    # for line in f.readlines():
+    #     print(line[0])
 
 
 def saveCordinates(rect):
 
     saveDir = p.saveDir + 'Coordinates'
     textName = fileName.split('.')[0] + '.txt'
+    pklName = fileName.split('.')[0] + '.pkl'
 
-    if os.path.exists(os.path.join(saveDir,textName)):
+    if os.path.exists(os.path.join(saveDir,pklName)):
+        # f = open(os.path.join(saveDir, textName), "a+")
+        # f.write("{}\n".format(list(rect)))
+        # f.close()
 
-        f = open(os.path.join(saveDir, textName), "a+")
-        f.write("{}\n".format(str(rect)))
-        f.close()
+        with open(os.path.join(saveDir,pklName), 'rb') as fp:
+            coord = pickle.load(fp)
+
+        coord += rect
+        # print(coord)
+
+        with open(os.path.join(saveDir,pklName), 'wb') as fp:
+            pickle.dump(coord, fp)
 
     else:
 
-        with open(saveDir + '/' + textName, 'w') as f:
-            f.write("{}\n".format(str(rect)))
+        with open(os.path.join(saveDir,pklName), 'wb') as fp:
+            pickle.dump(rect, fp)
+
+        # with open(saveDir + '/' + textName, 'w') as f:
+        #     f.write("{}\n".format(str(rect)))
 
     # saveCordinates(textName)
 
