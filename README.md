@@ -19,7 +19,7 @@ To annotate the image,<br>
 3. To show the next image, press 'n' key.<br>
 
 - [x] Saving multiple cordinates for a single image.<br>
-[ ] Saving cropped images for multiple cordinates from same image.<br> 
+- [ ] Saving cropped images for multiple cordinates from same image.<br> 
 
 If you have any question, please email me at shreyas0906@gmail.com
 
