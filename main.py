@@ -34,10 +34,12 @@ def startProcessDir(dirName, imageList):
             cv2.imshow(fileName, image)
             key = cv2.waitKey(1) & 0xFF
             if key == ord("n"):
-                saveCordinates(refPt)
-                saveCroppedImage(refPt)
                 cv2.destroyWindow(fileName)
                 break
+
+            if key == ord("s"):
+                saveCordinates(refPt)
+                saveCroppedImage(refPt)
 
             elif key == ord("r"):
                 image = imageClone
@@ -71,17 +73,29 @@ def clickDrag(event, x, y, flags, param):
 
 
 def saveCroppedImage(refPt):
+
     croppedImage = image[refPt[0][0]:refPt[1][0], refPt[0][1]:refPt[1][1]]
     saveName = fileName.split('.')[0] + '-cropped.jpg'
     cv2.imwrite(p.saveDir + '/' + saveName, croppedImage)
 
 
 def saveCordinates(rect):
+
     saveDir = p.saveDir + 'Coordinates'
     textName = fileName.split('.')[0] + '.txt'
 
-    with open(saveDir + '/' + textName, 'w') as f:
+    if os.path.exists(os.path.join(saveDir,textName)):
+
+        f = open(os.path.join(saveDir, textName), "a+")
         f.write("{}\n".format(str(rect)))
+        f.close()
+
+    else:
+
+        print("file doesn't exist")
+        print("creating file : ", textName)
+        with open(saveDir + '/' + textName, 'w') as f:
+            f.write("{}\n".format(str(rect)))
 
 
 if __name__ == '__main__':
