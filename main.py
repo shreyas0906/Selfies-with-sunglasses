@@ -1,5 +1,6 @@
 import os
 import cv2
+import sys
 from argparse import ArgumentParser
 
 
@@ -47,7 +48,8 @@ def startProcessDir(dirName, imageList):
 
             elif key == ord("q"):
                 cv2.destroyAllWindows()
-                break
+                sys.exit()
+
 
 
 def checkAndCreateSaveDir(p):
