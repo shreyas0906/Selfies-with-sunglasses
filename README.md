@@ -21,6 +21,7 @@ To annotate the image,<br>
 
 - [x] Saving multiple cordinates for a single image.<br>
 - [x] Saving cropped images for multiple cordinates from same image.<br> 
+- [x] Reset coordinates. 
 
 After completing annotation, the script creates two directories. One containing the cropped images and the 
 other containing the pickled coordinates. <br>
