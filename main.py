@@ -45,6 +45,7 @@ def startProcessDir(dirName, imageList):
 
             elif key == ord("r"):
                 image = imageClone
+                resetCoordinates(fileName)
                 cv2.setMouseCallback(fileName, clickDrag)
 
             elif key == ord("q"):
@@ -71,6 +72,12 @@ def clickDrag(event, x, y, flags, param):
     elif event == cv2.EVENT_LBUTTONUP:
         refPt.append((x, y))
         cv2.rectangle(image, refPt[0], refPt[1], (255, 255, 255), 1)
+
+def resetCoordinates(fileName):
+
+    pklName = fileName.split('.')[0] + '.pkl'
+    os.remove(os.path.join(p.saveDir + 'Coordinates', pklName))
+
 
 def saveCroppedImage(fileName):
 
