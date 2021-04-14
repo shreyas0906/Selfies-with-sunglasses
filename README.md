@@ -1,8 +1,8 @@
-# Selfies with sunglasses.
+# Selfies with sunglasses and a simple image annotation tool.
 
 ![alt text](https://github.com/shreyas0906/Selfies-with-sunglasses/blob/master/dataset-original.jpg)
 
-This dataset is a collection of images of selfies with sunglasses. The dataset contains 2768 unannotated images and a total of 5536 images. The repository also has the code for annotation. https://www.youtube.com/watch?v=-0QIr6Nv1Yo
+This dataset is a collection of images of selfies with sunglasses. The dataset contains 2768 unannotated images and a total of 5536 images. The repository also has the code for annotation. [YouTube](https://www.youtube.com/watch?v=-0QIr6Nv1Yo)
 
 Usage:
 ```
