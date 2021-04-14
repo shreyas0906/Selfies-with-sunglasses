@@ -5,9 +5,9 @@ youtubeId: watch?v=-0QIr6Nv1Yo
 ### Selfies with sunglasses
 
 This dataset is a collection of images of selfies with sunglasses. The dataset contains 2768 unannotated images and a total of 5536 images.
-The repository also has the code for iamge annotation.
+The repository also has the code for image annotation.
 
-{% include youtubePlayer.html id=page.youtubeId %}
+{{% include youtubePlayer.html id=page.youtubeId %}}
 
 ## Usage:
 ```
