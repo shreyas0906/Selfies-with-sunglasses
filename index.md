@@ -13,8 +13,6 @@ Example:
 ```
 python main.py --imageDir selfies-sunglasses/ --saveDir test
 ```
-[Link](url) and ![Image](src)
-```
 
 To annotate the image,<br>
 1. left-click the mouse and drag across the image where you wish to draw the box.<br>
