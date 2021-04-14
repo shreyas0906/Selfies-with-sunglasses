@@ -1,37 +1,33 @@
-## Welcome to GitHub Pages
+### Selfies with sunglasses
 
-You can use the [editor on GitHub](https://github.com/shreyas0906/Selfies-with-sunglasses/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This dataset is a collection of images of selfies with sunglasses. The dataset contains 2768 unannotated images and a total of 5536 images.
+The repository also has the code for iamge annotation.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+[youtube] (https://www.youtube.com/watch?v=-0QIr6Nv1Yo)
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
+## Usage:
+```
+python main.py --imageDir "directory containing images" --saveDir "name of directory to save cropped images"
+```
+Example:
+```
+python main.py --imageDir selfies-sunglasses/ --saveDir test
+```
 [Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+To annotate the image,<br>
+1. left-click the mouse and drag across the image where you wish to draw the box.<br>
+2. To save the coordinates of each box drawn, press 's' key. <br>
+3. To re-draw the rectangle press 'r' key.<br>
+4. To show the next image, press 'n' key.<br>
+5. To stop the program press 'q' key. <br>
 
-### Jekyll Themes
+- [x] Saving multiple cordinates for a single image.<br>
+- [x] Saving cropped images for multiple cordinates from same image.<br>
+- [x] Reset coordinates.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/shreyas0906/Selfies-with-sunglasses/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+After completing annotation, the script creates two directories. One containing the cropped images and the
+other containing the pickled coordinates. <br>
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+If you have any questions, please email me at shreyas0906@gmail.com
