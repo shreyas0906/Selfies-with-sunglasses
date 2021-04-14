@@ -3,7 +3,7 @@
 This dataset is a collection of images of selfies with sunglasses. The dataset contains 2768 unannotated images and a total of 5536 images.
 The repository also has the code for iamge annotation.
 
-[youtube] (https://www.youtube.com/watch?v=-0QIr6Nv1Yo)
+[youtube](https://www.youtube.com/watch?v=-0QIr6Nv1Yo)
 
 ## Usage:
 ```
